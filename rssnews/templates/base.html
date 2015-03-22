@@ -1,0 +1,29 @@
+{% load staticfiles %}
+{% load url from future %}
+
+<html>
+<head>
+    <title>LiveBeat News </title>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/master.css" %}">
+    {% block head %}
+    {% endblock head %}
+</head>
+<body>
+    <div id="content">
+        <div id="header">
+            <div id="site-logo">LB</div>
+            {% if user.is_authenticated %}
+                <div id="user-info">{{ user.username }} | <a href="/feed/">submit</a> | <a href="/feeds/">feeds</a> | <a href="{% url 'logout' %}">logout</a></div>
+            {% else %}
+                <div id="user-info"><a href="{% url 'login' %}">login</a>
+                 | <a href="/register/">register</a>
+                </div>
+            {% endif %}
+            <div id="site-title"><h1><a href="/"> LiveBeat News </a></h1></div>
+        </div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>
